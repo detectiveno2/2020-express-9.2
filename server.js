@@ -4,22 +4,15 @@
 // we've started you off with Express (https://expressjs.com/)
 // but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require("express");
-const app = express();
-
 const bodyParser = require("body-parser");
-const low = require("lowdb");
-const FileSync = require("lowdb/adapters/FileSync");
-const adapter = new FileSync("db.json");
-const db = low(adapter);
 const shortid = require("shortid");
 
-// Routes
+const app = express();
 
+// Routes
 const usersRoute = require('./routes/users.route');
 
 app.use('/users', usersRoute);
-
-db.defaults({ books: [] }).write();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
