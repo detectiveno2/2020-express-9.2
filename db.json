@@ -1,13 +1,14 @@
 {
   "books": [
     {
-      "title": "Harry Potter",
-      "description": "A magic book"
-    },
-    {
       "title": "Nobita và những người bạn",
       "description": "Cuộc phiêu lưu nhàm chán",
       "id": "ri2xch2ed"
+    },
+    {
+      "title": "Harry Potter",
+      "description": "Cute wizards",
+      "id": "m3qJkBCPO"
     }
   ]
 }

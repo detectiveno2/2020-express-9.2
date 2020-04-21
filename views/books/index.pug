@@ -2,4 +2,9 @@ h2 Your books self
 a(href='/books/create') Add a new book
 ul
   each book in books
-    li= book.title
+    li
+      span= book.title
+      span &nbsp
+      a(href='/books/edit/' + book.id) Edit
+      span &nbsp
+      a(href='#') Delete

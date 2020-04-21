@@ -37,6 +37,10 @@ app.post('/books/create', (req, res) => {
   res.redirect('/books');
 })
 
+app.get('books/edit/:id', (req, res) => {
+  res.render('books/edit');
+})
+
 app.get('/', (req, res) => {
   res.render('index');
 })
