@@ -38,7 +38,14 @@ app.post('/books/create', (req, res) => {
 })
 
 app.get('books/edit/:id', (req, res) => {
-  res.render('books/edit');
+  res.render('books/edit', {
+    id: req.params.id,
+  });
+})
+
+app.post('books/edit', (req, res) => {
+  db.get('todos').find({id: req.body.id}).assign({title: req.body.title}).write();
+  res.redirect('')
 })
 
 app.get('/', (req, res) => {
