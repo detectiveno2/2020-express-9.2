@@ -13,6 +13,12 @@ const adapter = new FileSync("db.json");
 const db = low(adapter);
 const shortid = require("shortid");
 
+// Routes
+
+const usersRoute = require('./routes/users.route');
+
+app.use('/users', usersRoute);
+
 db.defaults({ books: [] }).write();
 
 app.use(bodyParser.json());
