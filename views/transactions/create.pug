@@ -1,12 +1,15 @@
-h3 Create user
-form(action='/users/create', method='post')
+h3 Create transaction
+form(action='', method='post')
   label(for='user') User:
-  select(id='user', name='user')
+  span &nbsp
+  select(id='user', name='userId')
     each user in users
       option(value=user.id)= user.name
   br
   label(for='book') Label:
-  select(id='book', name='book')
+  span &nbsp
+  select(id='book', name='bookId')
     each book in books
       option(value=book.id)= book.title
+  br
   button Create

@@ -2,11 +2,4 @@ h2 Your users
 a(href='/transactions/create') Create transaction
 ul
   each transaction in transactions
-    li
-      span= transaction
-      span &nbsp - &nbsp
-      span= user.phone
-      span &nbsp
-      a(href='/users/edit/' + user.id) Edit
-      span &nbsp
-      a(href='/users/delete/' + user.id) Delete
+    li= transaction.content
