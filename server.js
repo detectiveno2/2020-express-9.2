@@ -7,64 +7,25 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const shortid = require("shortid");
 
-const db = require('./db');
-
 const app = express();
 
 // Routes
-const usersRoute = require('./routes/users.route');
-
-
+const usersRoute = require("./routes/users.route");
+const booksRoute = require("./routes/books.route");
+const transactionsRoute = require('./routes/transactions.route');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/users', usersRoute);
+app.use("/users", usersRoute);
+app.use("/books", booksRoute);
+app.use('/transactions', transactionsRoute);
 
 app.set("view engine", "pug");
 app.set("views", "./views");
 
-app.get("/books", (req, res) => {
-  res.render("books/index", {
-    books: db.get("books").value()
-  });
-});
-
-app.get("/books/create", (req, res) => {
-  res.render("books/create");
-});
-
-app.post("/books/create", (req, res) => {
-  req.body.id = shortid.generate();
-  db.get("books")
-    .push(req.body)
-    .write();
-  res.redirect("/books");
-});
-
-app.get("/books/edit/:id", (req, res) => {
-  res.render("books/edit", {
-    id: req.params.id
-  });
-});
-
-app.post("/books/edit", (req, res) => {
-  db.get("books")
-    .find({ id: req.body.id })
-    .assign({ title: req.body.title })
-    .write();
-  res.redirect("/books");
-});
-
 app.get("/", (req, res) => {
   res.render("index");
-});
-
-app.get("/books/delete/:id", (req, res) => {
-  db.get("books")
-    .remove({ id: req.params.id })
-    .write();
-  res.redirect("/books");
 });
 
 // listen for requests :)

@@ -18,9 +18,20 @@
   ],
   "users": [
     {
+      "name": "Trung",
+      "phone": "0574869587",
+      "id": "kvaHoNawF"
+    },
+    {
+      "name": "Hieu",
+      "phone": "0896758394",
+      "id": "DQ2AFkdQN"
+    },
+    {
       "name": "Thien",
       "phone": "0782367185",
-      "id": "kvaHoNawF"
+      "id": "vcV_t16pg"
     }
-  ]
+  ],
+  "transactions": []
 }
