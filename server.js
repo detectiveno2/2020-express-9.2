@@ -13,11 +13,6 @@ const adapter = new FileSync("db.json");
 const db = low(adapter);
 const shortid = require('shortid');
 
-var books = [
-  {id: 5, title: 'Harry Potter', description: 'A magic book'},
-  {id: 4, title: 'How to be poet', description: 'So many poem'},
-]
-
 db.defaults({ books: [] }).write();
 
 app.use(bodyParser.json());
@@ -28,12 +23,18 @@ app.set('views', './views');
 
 app.get('/books', (req, res) => {
   res.render('books/index', {
-    books: books,
+    books: db.get('books').value(),
   })
 })
 
 app.get('/books/create', (req, res) => {
-  res.render
+  res.render('books/create');
+})
+
+app.post('/books/create', (req, res) => {
+  req.body.id = shortid.generate();
+  db.get('books').push(req.body).write();
+  res.redirect('/books');
 })
 
 app.get('/', (req, res) => {
