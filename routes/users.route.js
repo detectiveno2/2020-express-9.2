@@ -1,53 +1,19 @@
 const express = require("express");
-const shortid = require("shortid");
 
-const db = require("../db");
+const controller = require("../controllers/users.controller");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.render("users/index", {
-    users: db.get("users").value()
-  });
-});
+router.get("/", controller.index);
 
-router.get("/create", (req, res) => {
-  res.render("users/create");
-});
+router.get("/create", controller.create);
 
-router.post("/create", (req, res) => {
-  req.body.id = shortid.generate();
-  db.get("users")
-    .push(req.body)
-    .write();
-  res.redirect("/users");
-});
+router.post("/create", controller.postCreate);
 
-router.get("/edit/:id", (req, res) => {
-  let user = db
-    .get("users")
-    .find({ id: req.params.id })
-    .value();
-  res.render("users/edit", {
-    id: user.id,
-    oldName: user.name,
-    oldPhone: user.phone
-  });
-});
+router.get("/edit/:id", controller.edit);
 
-router.post("/edit", (req, res) => {
-  db.get("users")
-    .find({ id: req.body.id })
-    .assign(req.body)
-    .write();
-  res.redirect("/users");
-});
+router.post("/edit", controller.postEdit);
 
-router.get("/delete/:id", (req, res) => {
-  db.get("users")
-    .remove({ id: req.params.id })
-    .write();
-  res.redirect("/users");
-});
+router.get("/delete/:id", controller.delete);
 
 module.exports = router;

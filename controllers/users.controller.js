@@ -3,40 +3,46 @@ const shortid = require("shortid");
 const db = require("../db");
 
 module.exports.index = (req, res) => {
-  res.render("books/index", {
-    books: db.get("books").value()
+  res.render("users/index", {
+    users: db.get("users").value()
   });
 };
 
 module.exports.create = (req, res) => {
-  res.render("books/create");
+  res.render("users/create");
 };
 
 module.exports.postCreate = (req, res) => {
   req.body.id = shortid.generate();
-  db.get("books")
+  db.get("users")
     .push(req.body)
     .write();
-  res.redirect("/books");
+  res.redirect("/users");
 };
 
 module.exports.edit = (req, res) => {
-  res.render("books/edit", {
-    id: req.params.id
+  let user = db
+    .get("users")
+    .find({ id: req.params.id })
+    .value();
+  res.render("users/edit", {
+    id: user.id,
+    oldName: user.name,
+    oldPhone: user.phone
   });
 };
 
 module.exports.postEdit = (req, res) => {
-  db.get("books")
+  db.get("users")
     .find({ id: req.body.id })
-    .assign({ title: req.body.title })
+    .assign(req.body)
     .write();
-  res.redirect("/books");
+  res.redirect("/users");
 };
 
 module.exports.delete = (req, res) => {
-  db.get("books")
+  db.get("users")
     .remove({ id: req.params.id })
     .write();
-  res.redirect("/books");
+  res.redirect("/users");
 };

@@ -1,8 +1,6 @@
 const express = require("express");
-const shortid = require("shortid");
 
-const controller = require('../controllers/books.controller');
-const db = require("../db");
+const controller = require("../controllers/books.controller");
 
 const router = express.Router();
 
@@ -16,6 +14,6 @@ router.get("/edit/:id", controller.edit);
 
 router.post("/edit", controller.postEdit);
 
-router.get("/delete/:id", );
+router.get("/delete/:id", controller.delete);
 
 module.exports = router;

@@ -1,5 +1,11 @@
-h2 Your users
+h2 Your transactions
 a(href='/transactions/create') Create transaction
 ul
   each transaction in transactions
-    li= transaction.content
+    li
+      span= transaction.content
+      span &nbsp
+      if transaction.isComplete
+        span - Completed!
+      else
+        a(href='/transactions/complete/' + transaction.id) Done
