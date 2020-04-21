@@ -10,7 +10,11 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "lowdb": "^1.0.0",
+    "body-parser": "^1.19.0",
+    "shortid": "^2.2.15",
+    "pug": "^2.0.4"
   },
   "engines": {
     "node": "12.x"

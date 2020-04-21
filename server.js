@@ -6,27 +6,39 @@
 const express = require("express");
 const app = express();
 
-// our default array of dreams
-const dreams = [
-  "Find and count some sheep",
-  "Climb a really tall mountain",
-  "Wash the dishes"
-];
+const bodyParser = require('body-parser');
+const low = require("lowdb");
+const FileSync = require("lowdb/adapters/FileSync");
+const adapter = new FileSync("db.json");
+const db = low(adapter);
+const shortid = require('shortid');
 
-// make all the files in 'public' available
-// https://expressjs.com/en/starter/static-files.html
-app.use(express.static("public"));
+var books = [
+  {id: 5, title: 'Harry Potter', description: 'A magic book'},
+  {id: 4, title: 'How to be poet', description: 'So many poem'},
+]
 
-// https://expressjs.com/en/starter/basic-routing.html
-app.get("/", (request, response) => {
-  response.sendFile(__dirname + "/views/index.html");
-});
+db.defaults({ books: [] }).write();
 
-// send the default array of dreams to the webpage
-app.get("/dreams", (request, response) => {
-  // express helps us take JS objects and send them as JSON
-  response.json(dreams);
-});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.set('view engine', 'pug');
+app.set('views', './views');
+
+app.get('/books', (req, res) => {
+  res.render('books/index', {
+    books: books,
+  })
+})
+
+app.get('/books/create', (req, res) => {
+  res.render
+})
+
+app.get('/', (req, res) => {
+  res.render('index');
+})
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT, () => {
