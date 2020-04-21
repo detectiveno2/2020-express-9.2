@@ -7,6 +7,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const shortid = require("shortid");
 
+const db = require('./db');
+
 const app = express();
 
 // Routes

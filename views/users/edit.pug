@@ -1,0 +1,11 @@
+h3 Edit user
+form(action='/users/edit', method='post')
+  input(name='id', type='hidden', value=id)
+  label(for='name') New name:
+  br
+  input(id='name', name='name', type='text', value=oldName)
+  br
+  label(for='phone') New phone:
+  br
+  input(id='phone', name='phone', type='text', value=oldPhone)
+  button Update
