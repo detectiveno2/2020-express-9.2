@@ -12,10 +12,12 @@ const app = express();
 // Routes
 const usersRoute = require('./routes/users.route');
 
-app.use('/users', usersRoute);
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/users', usersRoute);
 
 app.set("view engine", "pug");
 app.set("views", "./views");
